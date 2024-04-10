@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overlay Background Image</title>
+<style>
+  body {
+    margin: 0;
+    padding: 90px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333333; /* Dark text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #content {
+    max-width: 900px; /* Adjusted max-width */
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+  #background-options {
+    grid-column: 1;
+    max-width: 600px; /* Adjusted max-width */
+    margin: 0 auto; /* Center the container */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 15px;
+    border-radius: 10px;
+  }
+  #background-search {
+    width: calc(100% - 22px); /* Adjust width for padding */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #cccccc; /* Light grey border */
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  #background-select {
+    width: calc(100% - 22px); /* Adjust width for padding */
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #cccccc; /* Light grey border */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    -webkit-appearance: none; /* Remove default arrow */
+    -moz-appearance: none;
+    appearance: none;
+    padding-left: 30px; /* Add space for the image */
+  }
+  #background-select option {
+    background-size: 20px auto;
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    padding-left: 30px; /* Add space for the image */
+  }
+  #background-select option[data-image="6093.png"] {
+    background-image: url("6093.png");
+  }
+  #background-select option[data-image="6094.jpg"] {
+    background-image: url("6094.jpg");
+  }
+  #background-select option[data-image="6099.jpg"] {
+    background-image: url("6099.jpg");
+  }
+  /* Add more background images here */
+  #image-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Adjusted max-width */
+    height: 500px; /* Adjusted height */
+    margin: 0 auto; /* Center the container */
+    padding: 5px;
+    background-color: #f9f9f9; /* Light grey background */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow content */
+    position: relative; /* Ensure position relative for absolute positioning */
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border: 2px solid #cccccc; /* Light grey border */
+    position: absolute; /* Position images absolutely */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+  }
+  #overlay-image {
+    opacity: 100; /* Adjust opacity as desired */
+  }
+  input[type="file"] {
+    display: none; /* Hide the file input */
+  }
+  label.upload-btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #4CAF50; /* Green button color */
+    color: #ffffff; /* White text color */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    grid-column: 1;
+  }
+  label.upload-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  #caution-note {
+  font-size: 14px;
+  color: #6b6b6b; /* Red color */
+}
+.download-btn {
+    display: inline-block;
+    padding: 5px 0px;
+    background-color: #3498db; /* Blue button color */
+    color: #ffffff; /* White text color */
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    grid-column: 1;
+}
+.download-btn:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+</style>
+</head>
+<body>
+  <div id="content">
+    <div id="background-options">
+      <input type="text" id="background-search" placeholder="Search backgrounds...">
+      <select id="background-select">
+        <option value="6.jpg" data-image="6.jpg" data-name="6093">6093</option>
+        <option value="10.jpg" data-image="10.jpg" data-name="6094">6094</option>
+        <option value="4.jpg" data-image="4.jpg" data-name="6099">6099</option>
+        <option value="2.jpg" data-image="2.jpg" data-name="53XSW6">53XSW6</option>
+        <option value="14.jpg" data-image="14.jpg" data-name="A20RZMSA-IV0.M0U">A20RZMSA-IV0.M0U</option>
+        <option value="5.jpg" data-image="5.jpg" data-name="CL24">CL24</option>
+        <option value="13.jpg" data-image="13.jpg" data-name="6111">6111</option>
+        <option value="12.jpg" data-image="12.jpg" data-name="L6833">L6833</option>
+        <option value="11.jpg" data-image="11.jpg" data-name="M85-4">M85-4</option>
+        <option value="9.jpg" data-image="9.jpg" data-name="M1024">M1024</option>
+        <option value="10.jpg" data-image="10.jpg" data-name="M1014">M1014</option>
+        <option value="7.jpg" data-image="7.jpg" data-name="VK1">VK1</option>
+        <option value="1.jpg" data-image="1.jpg" data-name="VK2">VK2</option>
+        <option value="8.jpg" data-image="8.jpg" data-name="VL">VL</option>
+        <!-- Add more background options here -->
+      </select>
+    </div>
+    <label for="overlay-file" class="upload-btn">Upload Overlay Photo</label>
+    <button id="download-btn" class="download-btn">Download example room</button>
+    <p id="caution-note">"If an error occurs, select the picture of the example room. Then, select your own room again with a transparent floor or wall."</p>
+    <p id="caution-note">"If an error still persists, try the method again without refreshing the page."</p>
+    <input type="file" id="overlay-file" accept="image/*">
+    <div id="image-container">
+      <img id="background-image" src="" alt="Background Image">
+      <img id="overlay-image" src="" alt="Overlay Image">
+    </div>
+  </div>
+
+
+  <script>
+    function setBackground() {
+      var selectedBackground = document.getElementById('background-select').value;
+      document.getElementById('background-image').src = selectedBackground;
+    }
+
+    document.getElementById('background-select').addEventListener('change', setBackground);
+
+    document.getElementById('overlay-file').addEventListener('change', function() {
+      var file = this.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var overlayImg = document.getElementById('overlay-image');
+        overlayImg.src = e.target.result;
+        overlayImg.style.display = 'block';
+        setBackground(); // Call setBackground() to ensure background selection remains functional
+        
+        // Set background image dimensions to match inserted photo
+        var backgroundImg = document.getElementById('background-image');
+        backgroundImg.style.width = overlayImg.offsetWidth + 'px';
+        backgroundImg.style.height = overlayImg.offsetHeight + 'px';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    document.getElementById('background-search').addEventListener('input', function() {
+      var searchValue = this.value.toLowerCase();
+      var options = document.querySelectorAll('#background-select option');
+      options.forEach(function(option) {
+        var name = option.dataset.name.toLowerCase();
+        if (name.indexOf(searchValue) > -1) {
+          option.style.display = 'block';
+        } else {
+          option.style.display = 'none';
+        }
+      });
+    });
+
+    // Download functionality
+    document.getElementById('download-btn').addEventListener('click', function() {
+      var link = document.createElement('a');
+      link.href = 'images-removebg-preview.png'; // Provide direct link to the image file
+      link.download = 'images-removebg-preview.png'; // Specify the file name for download
+      link.click();
+    });
+  </script>
+</body>
+</html>
