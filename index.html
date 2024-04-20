@@ -7,34 +7,27 @@
 <style>
   body {
     margin: 0;
-    padding: 90px;
+    padding: 20px;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0; 
     color: #333333; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
   }
   #content {
-    max-width: 900px; 
+    max-width: 100%; 
     width: 100%;
     text-align: center;
-    padding: 20px;
     background-color: #ffffff; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
+    padding: 20px;
   }
   #background-options {
-    grid-column: 1;
     max-width: 600px; 
     margin: 0 auto; 
     background-color: rgba(255, 255, 255, 0.8); 
     padding: 15px;
     border-radius: 10px;
+    margin-bottom: 20px;
   }
   #background-search {
     width: calc(100% - 22px); 
@@ -64,28 +57,16 @@
     background-position: 5px center;
     padding-left: 30px; 
   }
-  #background-select option[data-image="6093.png"] {
-    background-image: url("6093.png");
-  }
-  #background-select option[data-image="6094.jpg"] {
-    background-image: url("6094.jpg");
-  }
-  #background-select option[data-image="6099.jpg"] {
-    background-image: url("6099.jpg");
-  }
   
   #image-container {
     position: relative;
     width: 100%;
-    max-width: 800px; 
-    height: 500px; 
+    max-width: 100%; 
+    height: auto; 
     margin: 0 auto; 
     padding: 5px;
     background-color: #f9f9f9; 
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden; 
     position: relative; 
   }
@@ -94,20 +75,23 @@
     max-height: 100%;
     border-radius: 10px;
     border: 2px solid #cccccc; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
+    display: block;
+    margin: 0 auto;
   }
   #overlay-image {
-    opacity: 100; 
-  }
+  opacity: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
   input[type="file"] {
     display: none; 
   }
   label.upload-btn {
     display: inline-block;
-    padding: 5px 10px;
+    padding: 10px 20px;
     background-color: #4CAF50; 
     color: #ffffff; 
     font-size: 16px;
@@ -115,18 +99,17 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    grid-column: 1;
+    margin-bottom: 20px;
+    display: block;
+    max-width: 200px;
+    margin: 0 auto;
   }
   label.upload-btn:hover {
     background-color: #45a049; 
   }
-  #caution-note {
-    font-size: 14px;
-    color: #6b6b6b; 
-  }
   .download-btn {
     display: inline-block;
-    padding: 5px 0px;
+    padding: 10px 20px;
     background-color: #3498db; 
     color: #ffffff; 
     font-size: 16px;
@@ -134,10 +117,18 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    grid-column: 1;
+    margin-bottom: 20px;
+    display: block;
+    max-width: 200px;
+    margin: 0 auto;
   }
   .download-btn:hover {
     background-color: #2980b9; 
+  }
+  #caution-note {
+    font-size: 14px;
+    color: #6b6b6b; 
+    margin-bottom: 20px;
   }
 </style>
 </head>
@@ -160,29 +151,51 @@
         <option value="7.jpg" data-image="7.jpg" data-name="VK1">VK1</option>
         <option value="1.jpg" data-image="1.jpg" data-name="VK2">VK2</option>
         <option value="8.jpg" data-image="8.jpg" data-name="VL">VL</option>
-       
       </select>
-      <p id="caution-note">"Please select and download example rooms before trying your own room. Remember, the picture should have a transparent floor to see the tiles clearly."</p>
-      <button id="download-example-btn-1" class="download-btn">Kitchen</button>
-      <button id="download-example-btn-2" class="download-btn">Bathroom</button>
-      <button id="download-example-btn-3" class="download-btn">Living Room</button>
-      <button id="download-example-btn-4" class="download-btn">Bedroom</button>
+      <label for="overlay-file" class="upload-btn">Upload Room Photo</label>
+      <input type="file" id="overlay-file" accept="image/*">
     </div>
-    <label for="overlay-file" class="upload-btn">Upload Room Photo</label>
-    <input type="file" id="overlay-file" accept="image/*">
+    <p id="caution-note">"Please select and download example rooms before trying your own room. Remember, the picture should have a transparent floor to see the tiles clearly."</p>
+    <button id="download-example-btn-1" class="download-btn">Kitchen</button>
+    <button id="download-example-btn-2" class="download-btn">Bathroom</button>
+    <button id="download-example-btn-3" class="download-btn">Living Room</button>
+    <button id="download-example-btn-4" class="download-btn">Bedroom</button>
     <div id="image-container">
       <img id="background-image" src="" alt="Background Image">
       <img id="overlay-image" src="" alt="Overlay Image">
     </div>
-    <p id="caution-note">If an error occurs, select the picture of your choice. Then, select your example room, and after that, select the picture of your choice.</p>
-    <p id="caution-note">Please note that this website is still in progress, and as such, the accuracy of the tiles may not be optimal.</p>
+    <p id="caution-note">Please refresh the page to insert another room photo.</p>
   </div>
 
   <script>
-    function setBackground() {
-      var selectedBackground = document.getElementById('background-select').value;
-      document.getElementById('background-image').src = selectedBackground;
-    }
+  function setBackground() {
+  var selectedBackground = document.getElementById('background-select').value;
+  var backgroundImg = document.getElementById('background-image');
+  var overlayImg = document.getElementById('overlay-image');
+
+  overlayImg.onload = function() {
+   
+    var overlayWidth = overlayImg.offsetWidth;
+    var overlayHeight = overlayImg.offsetHeight;
+    
+   
+    overlayImg.style.width = overlayWidth + 'px';
+    overlayImg.style.height = overlayHeight + 'px';
+
+    
+    backgroundImg.style.width = overlayWidth + 'px';
+    backgroundImg.style.height = overlayHeight + 'px';
+    
+    
+    overlayImg.style.display = 'block';
+    backgroundImg.style.display = 'block';
+  };
+
+ 
+  backgroundImg.src = selectedBackground;
+}
+
+
 
     document.getElementById('background-select').addEventListener('change', setBackground);
 
@@ -193,12 +206,9 @@
         var overlayImg = document.getElementById('overlay-image');
         overlayImg.src = e.target.result;
         overlayImg.style.display = 'block';
-        setBackground(); 
         
-     
-        var backgroundImg = document.getElementById('background-image');
-        backgroundImg.style.width = overlayImg.offsetWidth + 'px';
-        backgroundImg.style.height = overlayImg.offsetHeight + 'px';
+       
+        setBackground();
       };
       reader.readAsDataURL(file);
     });
@@ -216,21 +226,20 @@
       });
     });
 
-    
     document.getElementById('download-example-btn-1').addEventListener('click', function() {
-      downloadExampleRoom('kitchen.png');
+      downloadExampleRoom('kitchen.jpg');
     });
 
     document.getElementById('download-example-btn-2').addEventListener('click', function() {
-      downloadExampleRoom('bathroom.png');
+      downloadExampleRoom('bathroom.jpg');
     });
 
     document.getElementById('download-example-btn-3').addEventListener('click', function() {
-      downloadExampleRoom('livingroom.png');
+      downloadExampleRoom('livingroom.jpg');
     });
 
     document.getElementById('download-example-btn-4').addEventListener('click', function() {
-      downloadExampleRoom('bedroom.png');
+      downloadExampleRoom('bedroom.jpg');
     });
 
     function downloadExampleRoom(fileName) {
